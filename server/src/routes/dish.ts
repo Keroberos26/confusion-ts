@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import express, { Request, Response, Router } from 'express';
 import { createDish, deleteDish, getDish, getDishes, updateDish } from '../app/controllers/dish';
 
 const router = Router();

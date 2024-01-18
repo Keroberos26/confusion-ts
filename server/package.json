@@ -5,9 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "prepare": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "proc": "npm run build && npm start"
+    "start": "npm run build && npm run prepare"
   },
   "keywords": [],
   "author": "",
