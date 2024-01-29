@@ -3,14 +3,6 @@ import Dish from '../models/Dish';
 
 export const createDish = (req: Request, res: Response, next: NextFunction) => {
   const newDish = new Dish(req.body);
-
-  // try {
-  //   const dish = newDish.save();
-  //   res.status(200).json(dish);
-  // } catch (error) {
-  //   next(error);
-  // }
-
   newDish
     .save()
     .then((dish) => res.status(200).json(dish))
