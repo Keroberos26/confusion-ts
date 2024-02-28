@@ -1,11 +1,11 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 
-export const connect = async () => {
+const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO || '');
+    await mongoose.connect(process.env.MONGO);
     console.log('Connect to MongoDB successfully');
   } catch (error) {
-    console.log('Connect to MongoDB failure');
+    console.log('Connect to MongoDB failure', error);
   }
 };
 
@@ -16,3 +16,5 @@ mongoose.connection.on('disconnected', () => {
 mongoose.connection.on('connected', () => {
   console.log('MongoDB is connected');
 });
+
+module.exports = { connect };
