@@ -6,10 +6,11 @@ const db = require('./config/db');
 
 dotenv.config();
 db.connect();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3030;
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 routes(app);
 
