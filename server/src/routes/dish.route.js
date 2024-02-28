@@ -8,6 +8,7 @@ const {
   getComments,
   writeComment,
 } = require('../app/controllers/dish');
+const { authBasic } = require('../app/middlewares/auth');
 
 const router = Router();
 
