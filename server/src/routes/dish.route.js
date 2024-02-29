@@ -16,7 +16,7 @@ router.post('/', createDish);
 router.put('/:dishId', updateDish);
 router.delete('/:dishId', deleteDish);
 router.get('/:dishId', getDish);
-router.get('/', getDishes);
+router.get('/', authBasic, getDishes);
 router.post('/:dishId/comment', writeComment);
 router.get('/:dishId/comments', getComments);
 

@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler');
 const { createError } = require('../../utils/createError');
 
 const authBasic = asyncHandler(async (req, res, next) => {
-  if (!req.signedCookies.user) {
+  if (!req.session.user) {
     const authHeader = req.headers.authorization;
     if (!authHeader) throw createError(401, 'You are not authenticated!');
 
@@ -10,11 +10,12 @@ const authBasic = asyncHandler(async (req, res, next) => {
     const username = auth[0];
     const password = auth[1];
     if (username === 'admin' && password === 'password') {
-      res.cookie('user', username, { signed: true });
+      req.session.user = username;
       next();
     } else throw createError(401, 'Wrong credentials!');
   } else {
-    if (req.signedCookies.user === 'admin') {
+    if (req.session.user === 'admin') {
+      console.log(req.session);
       next();
     } else throw createError(401, 'You are not authenticated');
   }

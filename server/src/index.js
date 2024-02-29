@@ -4,6 +4,8 @@ const routes = require('./routes');
 const errorHandler = require('./app/middlewares/error');
 const db = require('./config/db');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
+const FileStore = require('session-file-store')(session);
 
 dotenv.config();
 db.connect();
@@ -13,6 +15,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser(process.env.COOKEY));
+app.use(
+  session({
+    name: 'session-id',
+    secret: process.env.SESSION_KEY,
+    saveUninitialized: false,
+    resave: false,
+    store: new FileStore(),
+  }),
+);
 
 routes(app);
 
