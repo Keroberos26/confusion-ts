@@ -8,15 +8,15 @@ const {
   getComments,
   writeComment,
 } = require('../app/controllers/dish');
-const { authBasic } = require('../app/middlewares/auth');
+const authenticate = require('../config/auth');
 
 const router = Router();
 
-router.post('/', createDish);
-router.put('/:dishId', updateDish);
-router.delete('/:dishId', deleteDish);
-router.get('/:dishId', getDish);
-router.get('/', authBasic, getDishes);
+router.post('/', authenticate.verifyUser, createDish);
+router.put('/:dishId', authenticate.verifyUser, updateDish);
+router.delete('/:dishId', authenticate.verifyUser, deleteDish);
+router.get('/:dishId', authenticate.verifyUser, getDish);
+router.get('/', authenticate.verifyUser, getDishes);
 router.post('/:dishId/comment', writeComment);
 router.get('/:dishId/comments', getComments);
 

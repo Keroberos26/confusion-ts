@@ -22,7 +22,7 @@ const getDish = asyncHandler(async (req, res) => {
 });
 
 const getDishes = asyncHandler(async (req, res) => {
-  const dishes = await Dish.find();
+  const dishes = await Dish.find().populate('comments.author');
   res.status(200).json(dishes);
 });
 

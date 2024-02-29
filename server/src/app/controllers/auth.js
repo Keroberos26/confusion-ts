@@ -2,9 +2,11 @@ const asyncHandler = require('express-async-handler');
 const User = require('../models/User');
 const { createError } = require('../../utils/createError');
 const passport = require('passport');
+const authenticate = require('../../config/auth');
 
 const login = asyncHandler(async (req, res) => {
-  res.status(200).json({ success: true, status: 'You are successfully logged in!' });
+  const token = authenticate.getToken({ _id: req.user._id });
+  res.status(200).json({ success: true, token: token, status: 'You are successfully logged in!' });
 });
 
 const signup = asyncHandler(async (req, res) => {
