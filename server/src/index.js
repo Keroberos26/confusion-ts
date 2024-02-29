@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const routes = require('./routes');
 const errorHandler = require('./app/middlewares/error');
 const db = require('./config/db');
+const cookieParser = require('cookie-parser');
 
 dotenv.config();
 db.connect();
@@ -11,6 +12,7 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser(process.env.COOKEY));
 
 routes(app);
 
