@@ -4,7 +4,7 @@ const passport = require('passport');
 
 const router = Router();
 
-router.post('/login', login);
+router.post('/login', passport.authenticate('local'), login);
 router.get('/logout', logout);
 router.post('/signup', signup);
 

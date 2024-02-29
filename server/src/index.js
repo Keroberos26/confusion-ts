@@ -6,6 +6,8 @@ const db = require('./config/db');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
+const passport = require('passport');
+const authenticate = require('./config/auth');
 
 dotenv.config();
 db.connect();
@@ -24,6 +26,8 @@ app.use(
     store: new FileStore(),
   }),
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 routes(app);
 
